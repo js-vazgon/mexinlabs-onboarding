@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.nvidia.com)",
+      "WebFetch(domain:mexinlabs.ai)"
+    ]
+  }
+}
