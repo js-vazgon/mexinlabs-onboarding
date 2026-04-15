@@ -8,73 +8,82 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
+    /* ── TOKENS ───────────────────────────────────────────── */
     :root {
-      --bg-primary: #070b14;
-      --bg-secondary: #0e1525;
-      --bg-card: #121c30;
-      --bg-card-hover: #172238;
-      --border: rgba(99, 179, 237, 0.12);
-      --border-hover: rgba(99, 179, 237, 0.3);
-      --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.15);
-      --accent-green: #34d399;
-      --accent-purple: #a78bfa;
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
-      --badge-bg: rgba(56, 189, 248, 0.1);
-      --badge-border: rgba(56, 189, 248, 0.25);
-      --number-gradient: linear-gradient(135deg, #38bdf8, #818cf8);
+      --green:        #1ECB7B;
+      --green-dark:   #0ea865;
+      --green-dim:    rgba(30, 203, 123, 0.12);
+      --green-border: rgba(30, 203, 123, 0.25);
+      --orange:       #FF6B1A;
+      --orange-dark:  #e05510;
+      --orange-dim:   rgba(255, 107, 26, 0.12);
+      --orange-border:rgba(255, 107, 26, 0.25);
+
+      --bg:           #07100d;
+      --bg2:          #0c1a14;
+      --card:         #0f1f18;
+      --card-hover:   #142619;
+      --border:       rgba(30, 203, 123, 0.1);
+      --border-hover: rgba(30, 203, 123, 0.3);
+
+      --text:         #eef5f1;
+      --text2:        #8fada0;
+      --text3:        #507060;
+
+      --radius-card:  18px;
+      --radius-sm:    10px;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* ── RESET ───────────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+    /* ── BODY + MESH BACKGROUND ──────────────────────────── */
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
+      /* Subtle radial mesh with brand colors */
+      background-image:
+        radial-gradient(ellipse 80% 50% at 15% 10%,  rgba(30,203,123,0.07)  0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 85% 5%,   rgba(255,107,26,0.06)  0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 90% 80%,  rgba(30,203,123,0.05)  0%, transparent 60%),
+        radial-gradient(ellipse 70% 40% at 10% 90%,  rgba(255,107,26,0.05)  0%, transparent 55%);
     }
 
-    /* ── HEADER ─────────────────────────────────────────── */
+    /* ── HEADER ──────────────────────────────────────────── */
     header {
-      background: linear-gradient(180deg, #0a1020 0%, var(--bg-primary) 100%);
-      border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(12px);
+      background: rgba(7, 16, 13, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
 
     .header-inner {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 24px;
-      height: 68px;
+      height: 66px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .logo img {
-      height: 34px;
-      width: auto;
-    }
+    .logo img { height: 32px; width: auto; display: block; }
 
     .header-badge {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-glow);
-      border: 1px solid var(--badge-border);
-      padding: 5px 12px;
+      color: var(--green);
+      background: var(--green-dim);
+      border: 1px solid var(--green-border);
+      padding: 5px 14px;
       border-radius: 20px;
     }
 
@@ -82,229 +91,386 @@
     .hero {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 72px 24px 56px;
+      padding: 80px 24px 60px;
       text-align: center;
     }
 
-    .hero-eyebrow {
+    .hero-pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 11px;
+      font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--accent-green);
-      background: rgba(52, 211, 153, 0.08);
-      border: 1px solid rgba(52, 211, 153, 0.2);
-      padding: 6px 14px;
+      color: var(--orange);
+      background: var(--orange-dim);
+      border: 1px solid var(--orange-border);
+      padding: 6px 16px;
       border-radius: 20px;
       margin-bottom: 28px;
     }
 
-    .hero-eyebrow span.dot {
-      width: 6px;
-      height: 6px;
-      background: var(--accent-green);
+    .hero-pill .dot {
+      width: 6px; height: 6px;
+      background: var(--orange);
       border-radius: 50%;
-      animation: pulse 2s infinite;
+      animation: blink 2s ease-in-out infinite;
     }
 
-    @keyframes pulse {
+    @keyframes blink {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+      50% { opacity: 0.3; }
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-size: clamp(2rem, 5vw, 3.4rem);
       font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      color: var(--text);
       margin-bottom: 20px;
     }
 
-    .hero h1 span {
-      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #34d399 100%);
+    .hero h1 .grad {
+      background: linear-gradient(130deg, var(--green) 0%, #7dffc3 40%, var(--orange) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
     .hero p {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      max-width: 620px;
-      margin: 0 auto 16px;
+      font-size: 1.05rem;
+      color: var(--text2);
+      max-width: 580px;
+      margin: 0 auto;
       font-weight: 400;
     }
 
-    .hero-meta {
+    .hero-stats {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 24px;
-      margin-top: 32px;
+      gap: 32px;
+      margin-top: 36px;
       flex-wrap: wrap;
     }
 
-    .hero-stat {
+    .stat {
+      font-size: 13px;
+      color: var(--text3);
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      color: var(--text-muted);
+      gap: 7px;
     }
 
-    .hero-stat .icon {
-      font-size: 16px;
-    }
+    .stat strong { color: var(--text2); font-weight: 600; }
 
-    .hero-stat strong {
-      color: var(--text-secondary);
-    }
-
-    /* ── DIVIDER ─────────────────────────────────────────── */
-    .divider {
-      max-width: 1200px;
-      margin: 0 auto 48px;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .divider-line {
-      flex: 1;
-      height: 1px;
+    .stat-divider {
+      width: 1px; height: 18px;
       background: var(--border);
     }
 
-    .divider-label {
-      font-size: 12px;
+    /* ── ONBOARDING NOTE ─────────────────────────────────── */
+    .onboarding-note {
+      max-width: 760px;
+      margin: 0 auto 56px;
+      padding: 0 24px;
+    }
+
+    .note-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--orange-dim);
+      border: 1px solid var(--orange-border);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+    }
+
+    .note-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .note-box p {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    .note-box strong { color: var(--orange); }
+
+    .note-box a {
+      color: var(--orange);
       font-weight: 600;
+      text-decoration: none;
+    }
+
+    .note-box a:hover { text-decoration: underline; }
+
+    /* ── DIVIDER ─────────────────────────────────────────── */
+    .section-divider {
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .div-line { flex: 1; height: 1px; background: var(--border); }
+
+    .div-label {
+      font-size: 11px;
+      font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--text3);
     }
 
     /* ── GRID ────────────────────────────────────────────── */
-    .sessions-grid {
+    .grid {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 24px 80px;
+      padding: 0 24px 96px;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
 
-    /* ── CARD ────────────────────────────────────────────── */
+    /* ── CARD BASE ───────────────────────────────────────── */
     .card {
-      background: var(--bg-card);
+      background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px;
+      border-radius: var(--radius-card);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.22s ease, border-color 0.22s ease,
+                  background 0.22s ease, box-shadow 0.22s ease;
       position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 60% 40% at 50% 0%, var(--accent-glow), transparent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
     }
 
     .card:hover {
+      transform: translateY(-4px);
       border-color: var(--border-hover);
-      background: var(--bg-card-hover);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(56, 189, 248, 0.08);
+      background: var(--card-hover);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5),
+                  0 0 0 1px rgba(30,203,123,0.06);
     }
 
-    .card:hover::before {
-      opacity: 1;
-    }
-
+    /* ── FEATURED CARD (session 1 – YouTube) ─────────────── */
     .card-featured {
       grid-column: 1 / -1;
     }
 
-    .card-featured .card-inner {
+    .card-featured .card-body {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 0;
     }
 
-    .card-featured .video-wrapper {
-      border-radius: 10px;
-      overflow: hidden;
-      background: #000;
+    .yt-frame {
       aspect-ratio: 16/9;
+      background: #000;
     }
 
-    .card-featured .video-wrapper iframe {
+    .yt-frame iframe {
       width: 100%;
       height: 100%;
       border: none;
+      display: block;
     }
 
-    .card-number {
-      display: inline-flex;
+    /* ── THUMBNAIL (NVIDIA cards) ────────────────────────── */
+    .thumb {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .thumb-bg {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover .thumb-bg { transform: scale(1.04); }
+
+    /* Per-topic gradients — all within green/orange palette */
+    .th-2 .thumb-bg { background: linear-gradient(135deg, #063d25 0%, #0f2d1a 40%, #1a1200 100%); }
+    .th-3 .thumb-bg { background: linear-gradient(135deg, #3d1a00 0%, #1f0d00 50%, #0a1a10 100%); }
+    .th-4 .thumb-bg { background: linear-gradient(135deg, #0a2e1c 0%, #0a1f12 40%, #1f1200 100%); }
+    .th-5 .thumb-bg { background: linear-gradient(135deg, #052818 0%, #0e2210 40%, #261300 100%); }
+    .th-6 .thumb-bg { background: linear-gradient(135deg, #062918 0%, #021a0d 50%, #251100 100%); }
+    .th-7 .thumb-bg { background: linear-gradient(135deg, #2b1200 0%, #1a0a00 50%, #041d10 100%); }
+    .th-8 .thumb-bg { background: linear-gradient(135deg, #291500 0%, #160c00 50%, #072214 100%); }
+    .th-9 .thumb-bg { background: linear-gradient(135deg, #1a3020 0%, #0d1a0e 50%, #2a1200 100%); }
+
+    /* Grid lines overlay */
+    .thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+
+    /* Topic icon */
+    .thumb-icon {
+      position: absolute;
+      inset: 0;
+      display: flex;
       align-items: center;
       justify-content: center;
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: var(--number-gradient);
-      font-size: 15px;
-      font-weight: 700;
-      color: #fff;
-      flex-shrink: 0;
-      margin-bottom: 4px;
+      pointer-events: none;
     }
 
-    .card-header {
+    .thumb-icon svg {
+      width: 72px;
+      height: 72px;
+      opacity: 0.12;
+    }
+
+    /* Play button */
+    .play-btn {
+      position: absolute;
+      inset: 0;
       display: flex;
-      align-items: flex-start;
-      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      text-decoration: none;
     }
 
-    .card-source {
-      font-size: 11px;
-      font-weight: 600;
+    .play-circle {
+      width: 52px;
+      height: 52px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .play-btn:hover .play-circle {
+      background: rgba(30, 203, 123, 0.25);
+      border-color: var(--green);
+      transform: scale(1.1);
+    }
+
+    .play-circle svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+      margin-left: 3px; /* optical center for play triangle */
+    }
+
+    /* Thumbnail label (bottom-left) */
+    .thumb-label {
+      position: absolute;
+      bottom: 10px;
+      left: 12px;
+      z-index: 2;
+      font-size: 10px;
+      font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 6px;
+      color: rgba(255,255,255,0.7);
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(6px);
+      padding: 3px 8px;
+      border-radius: 5px;
+      pointer-events: none;
     }
 
-    .card h2 {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-primary);
+    /* Session number chip (top-left of thumbnail) */
+    .thumb-num {
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      z-index: 2;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--green), var(--orange));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+      pointer-events: none;
+    }
+
+    /* ── CARD CONTENT ────────────────────────────────────── */
+    .card-content {
+      padding: 22px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+    }
+
+    .card-featured .card-content {
+      padding: 28px 32px;
+      justify-content: center;
+    }
+
+    .source-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 6px;
+      width: fit-content;
+    }
+
+    .badge-yt {
+      color: #ff6b6b;
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.2);
+    }
+
+    .badge-nvidia {
+      color: #76b900;
+      background: rgba(118, 185, 0, 0.08);
+      border: 1px solid rgba(118, 185, 0, 0.2);
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
       line-height: 1.4;
       letter-spacing: -0.01em;
     }
 
-    .card-featured .content-block h2 {
-      font-size: 1.4rem;
+    .card-featured .card-title {
+      font-size: 1.5rem;
     }
 
-    .card p {
-      font-size: 14px;
-      color: var(--text-secondary);
+    .card-desc {
+      font-size: 13px;
+      color: var(--text2);
       line-height: 1.65;
     }
 
-    .card-tags {
+    .card-featured .card-desc { font-size: 14px; }
+
+    .tags {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
@@ -314,504 +480,507 @@
     .tag {
       font-size: 11px;
       font-weight: 500;
-      color: var(--text-muted);
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 4px 10px;
-      border-radius: 6px;
+      color: var(--text3);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 3px 9px;
+      border-radius: 5px;
     }
 
-    .card-cta {
+    .cta {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
       text-decoration: none;
-      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green);
+      background: var(--green-dim);
+      border: 1px solid var(--green-border);
+      padding: 9px 16px;
       border-radius: 8px;
-      border: 1px solid var(--badge-border);
-      background: var(--accent-glow);
-      transition: all 0.2s ease;
       width: fit-content;
-      margin-top: auto;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
     }
 
-    .card-cta:hover {
-      background: rgba(56, 189, 248, 0.2);
-      border-color: rgba(56, 189, 248, 0.5);
+    .cta:hover {
+      background: rgba(30,203,123,0.2);
+      border-color: rgba(30,203,123,0.5);
       transform: translateX(2px);
     }
 
-    .card-cta svg {
-      width: 14px;
-      height: 14px;
-      flex-shrink: 0;
-    }
+    .cta svg { width: 13px; height: 13px; flex-shrink: 0; }
 
-    /* ── NVIDIA BADGE ────────────────────────────────────── */
-    .nvidia-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      color: #76b900;
-      background: rgba(118, 185, 0, 0.08);
-      border: 1px solid rgba(118, 185, 0, 0.2);
-      padding: 3px 8px;
-      border-radius: 6px;
-    }
-
-    .youtube-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      color: #f87171;
-      background: rgba(248, 113, 113, 0.08);
-      border: 1px solid rgba(248, 113, 113, 0.2);
-      padding: 3px 8px;
-      border-radius: 6px;
-    }
-
-    /* ── DUAL CARD (item 9) ──────────────────────────────── */
-    .card-dual .dual-sessions {
+    /* ── DUAL CARD (session 9) ───────────────────────────── */
+    .dual-wrap {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
-    .dual-session-item {
-      padding: 16px;
-      background: rgba(255,255,255,0.03);
+    .dual-item {
+      background: rgba(255,255,255,0.025);
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .dual-session-item h3 {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 8px;
+    .dual-item-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
       line-height: 1.4;
+    }
+
+    .dual-item-desc {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.6;
     }
 
     /* ── FOOTER ──────────────────────────────────────────── */
     footer {
-      background: var(--bg-secondary);
+      background: var(--bg2);
       border-top: 1px solid var(--border);
-      padding: 40px 24px;
+      padding: 44px 24px;
       text-align: center;
     }
 
-    .footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
 
     .footer-inner img {
-      height: 28px;
-      opacity: 0.7;
-      margin-bottom: 16px;
+      height: 26px;
+      opacity: 0.65;
+      display: block;
+      margin: 0 auto 14px;
     }
 
     footer p {
-      font-size: 13px;
-      color: var(--text-muted);
+      font-size: 12px;
+      color: var(--text3);
     }
 
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
+    footer a { color: var(--green); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
 
     /* ── RESPONSIVE ──────────────────────────────────────── */
-    @media (max-width: 768px) {
-      .card-featured .card-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .card-featured {
-        grid-column: auto;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .sessions-grid {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .card-featured { grid-column: 1 / -1; }
+      .card-featured .card-body { grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 480px) {
-      .header-badge {
-        display: none;
-      }
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+      .card-featured { grid-column: auto; }
+      .hero h1 { font-size: 2rem; }
+      .header-badge { display: none; }
+      .stat-divider { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="header-inner">
-      <a href="https://mexinlabs.ai" class="logo" target="_blank" rel="noopener">
-        <img src="https://mexinlabs.ai/assets/LogoBlanco-Cc_0xiUD.png" alt="Mexin Labs" />
-      </a>
-      <span class="header-badge">Industrial AI Onboarding</span>
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-eyebrow">
-      <span class="dot"></span>
-      Programa de Onboarding · Equipo de Ventas
-    </div>
-    <h1>
-      Domina el mundo del<br />
-      <span>Industrial AI</span>
-    </h1>
-    <p>
-      Aprende los conceptos clave, tecnologías y casos de uso del AI industrial
-      a través de sesiones seleccionadas de NVIDIA GTC 2026 y líderes de la industria.
-    </p>
-    <div class="hero-meta">
-      <span class="hero-stat">
-        <span class="icon">🎬</span>
-        <strong>9</strong>&nbsp;sesiones curadas
-      </span>
-      <span class="hero-stat">
-        <span class="icon">🏭</span>
-        <strong>Manufactura · Retail · Edge AI</strong>
-      </span>
-      <span class="hero-stat">
-        <span class="icon">🤖</span>
-        <strong>NVIDIA GTC 2026</strong>
-      </span>
-    </div>
-  </section>
-
-  <!-- SECTION DIVIDER -->
-  <div class="divider">
-    <div class="divider-line"></div>
-    <span class="divider-label">Sesiones en orden</span>
-    <div class="divider-line"></div>
+<!-- ── HEADER ──────────────────────────────────────────── -->
+<header>
+  <div class="header-inner">
+    <a href="https://mexinlabs.ai" target="_blank" rel="noopener" class="logo">
+      <img src="https://mexinlabs.ai/assets/LogoBlanco-Cc_0xiUD.png" alt="Mexin Labs" />
+    </a>
+    <span class="header-badge">Industrial AI Onboarding</span>
   </div>
+</header>
 
-  <!-- SESSIONS GRID -->
-  <main class="sessions-grid">
+<!-- ── HERO ────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-pill">
+    <span class="dot"></span>
+    Programa de Onboarding · Equipo de Ventas
+  </div>
+  <h1>
+    Domina el mundo del<br />
+    <span class="grad">Industrial AI</span>
+  </h1>
+  <p>
+    Aprende los conceptos clave, tecnologías y casos de uso del AI industrial
+    a través de sesiones curadas de NVIDIA GTC 2026.
+  </p>
+  <div class="hero-stats">
+    <span class="stat"><strong>10</strong>&nbsp;sesiones curadas</span>
+    <span class="stat-divider"></span>
+    <span class="stat"><strong>NVIDIA GTC 2026</strong></span>
+    <span class="stat-divider"></span>
+    <span class="stat">Manufactura · Retail · <strong>Edge AI</strong></span>
+  </div>
+</section>
 
-    <!-- SESSION 1 — YouTube (featured) -->
-    <article class="card card-featured">
-      <div class="card-inner">
-        <div class="video-wrapper">
-          <iframe
-            src="https://www.youtube.com/embed/RLZk-Fr7wz4"
-            title="What's Next In Industrial AI?"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
-        <div class="content-block" style="display:flex;flex-direction:column;gap:16px;">
-          <div>
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-              <span class="card-number">1</span>
-              <span class="youtube-badge">
-                <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.54 3.5 12 3.5 12 3.5s-7.54 0-9.38.55A3.02 3.02 0 0 0 .5 6.19C0 8.04 0 12 0 12s0 3.96.5 5.81a3.02 3.02 0 0 0 2.12 2.14C4.46 20.5 12 20.5 12 20.5s7.54 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14C24 15.96 24 12 24 12s0-3.96-.5-5.81zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
-                YouTube
-              </span>
-            </div>
-            <h2>What's Next In Industrial AI?</h2>
-          </div>
-          <p>
-            Una visión panorámica del futuro del AI industrial: desde la autonomía en piso de producción hasta la convergencia del edge computing con modelos de lenguaje de última generación. El punto de partida ideal para entender el mercado que Mexin Labs está transformando.
-          </p>
-          <div class="card-tags">
-            <span class="tag">Industrial AI</span>
-            <span class="tag">Visión de mercado</span>
-            <span class="tag">Edge Computing</span>
-            <span class="tag">Manufactura</span>
-          </div>
-          <a href="https://www.youtube.com/watch?v=RLZk-Fr7wz4" target="_blank" rel="noopener" class="card-cta">
-            Ver en YouTube
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-              <polyline points="15 3 21 3 21 9"/>
-              <line x1="10" y1="14" x2="21" y2="3"/>
-            </svg>
-          </a>
-        </div>
+<!-- ── NVIDIA NOTE ──────────────────────────────────────── -->
+<div class="onboarding-note">
+  <div class="note-box">
+    <span class="note-icon">🔐</span>
+    <p>
+      <strong>Paso previo:</strong> Las sesiones de NVIDIA GTC requieren una cuenta gratuita en
+      <a href="https://www.nvidia.com/en-us/on-demand/" target="_blank" rel="noopener">NVIDIA On-Demand</a>.
+      Regístrate antes de empezar — es gratis y te da acceso a todo el catálogo de GTC 2026.
+    </p>
+  </div>
+</div>
+
+<!-- ── DIVIDER ──────────────────────────────────────────── -->
+<div class="section-divider">
+  <span class="div-line"></span>
+  <span class="div-label">Sesiones · en orden</span>
+  <span class="div-line"></span>
+</div>
+
+<!-- ── GRID ────────────────────────────────────────────── -->
+<main class="grid">
+
+  <!-- ① YOUTUBE — FEATURED ────────────────────────────── -->
+  <article class="card card-featured">
+    <div class="card-body">
+
+      <div class="yt-frame">
+        <iframe
+          src="https://www.youtube.com/embed/RLZk-Fr7wz4"
+          title="What's Next In Industrial AI?"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
       </div>
-    </article>
 
-    <!-- SESSION 2 -->
-    <article class="card">
-      <div class="card-header">
-        <span class="card-number">2</span>
-        <div>
-          <div class="nvidia-badge">NVIDIA GTC 2026</div>
+      <div class="card-content">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--green),var(--orange));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;">1</div>
+          <span class="source-badge badge-yt">
+            <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.54 3.5 12 3.5 12 3.5s-7.54 0-9.38.55A3.02 3.02 0 0 0 .5 6.19C0 8.04 0 12 0 12s0 3.96.5 5.81a3.02 3.02 0 0 0 2.12 2.14C4.46 20.5 12 20.5 12 20.5s7.54 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14C24 15.96 24 12 24 12s0-3.96-.5-5.81zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+            YouTube
+          </span>
         </div>
+        <p class="card-title">What's Next In Industrial AI?</p>
+        <p class="card-desc">
+          Una visión panorámica del futuro del AI industrial: desde la autonomía en piso de producción hasta la convergencia del edge computing con modelos de lenguaje de última generación. El punto de partida ideal para entender el mercado que Mexin Labs está transformando.
+        </p>
+        <div class="tags">
+          <span class="tag">Industrial AI</span>
+          <span class="tag">Visión de mercado</span>
+          <span class="tag">Edge Computing</span>
+          <span class="tag">Manufactura</span>
+        </div>
+        <a href="https://www.youtube.com/watch?v=RLZk-Fr7wz4" target="_blank" rel="noopener" class="cta">
+          Ver en YouTube
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
       </div>
-      <h2>Assembling Industrial Digital Twins with OpenUSD and NVIDIA Omniverse Libraries</h2>
-      <p>
-        Aprende a construir gemelos digitales industriales usando el estándar abierto OpenUSD y las bibliotecas de NVIDIA Omniverse. Clave para vender soluciones de simulación y monitoreo de activos en tiempo real.
-      </p>
-      <div class="card-tags">
+
+    </div>
+  </article>
+
+  <!-- ② EDGE COMPUTING 101 ───────────────────────────────── -->
+  <article class="card">
+    <div class="thumb th-2">
+      <div class="thumb-bg"></div>
+      <div class="thumb-icon">
+        <!-- network / edge icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1ECB7B" stroke-width="1.2"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><line x1="12" y1="7" x2="5" y2="17"/><line x1="12" y1="7" x2="19" y2="17"/><line x1="5" y1="19" x2="19" y2="19"/></svg>
+      </div>
+      <span class="thumb-num">2</span>
+      <span class="thumb-label">Edge Computing 101</span>
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-s81842/" target="_blank" rel="noopener" class="play-btn" aria-label="Ver sesión">
+        <span class="play-circle">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </span>
+      </a>
+    </div>
+    <div class="card-content">
+      <span class="source-badge badge-nvidia">NVIDIA GTC 2026</span>
+      <p class="card-title">Edge Computing 101: Introduction to Smart Edge and Autonomous Robots</p>
+      <p class="card-desc">Introducción fundamental al edge computing inteligente y los robots autónomos. Base conceptual para entender la propuesta de valor de Mexin Labs desde cero.</p>
+      <div class="tags">
+        <span class="tag">Edge Computing</span>
+        <span class="tag">Robots Autónomos</span>
+        <span class="tag">Fundamentos</span>
+      </div>
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-s81842/" target="_blank" rel="noopener" class="cta">
+        Ver sesión
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+  </article>
+
+  <!-- ③ DIGITAL TWINS + OPENOUSD ──────────────────────── -->
+  <article class="card">
+    <div class="thumb th-2">
+      <div class="thumb-bg"></div>
+      <div class="thumb-icon">
+        <!-- cube / 3D icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1ECB7B" stroke-width="1.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      </div>
+      <span class="thumb-num">3</span>
+      <span class="thumb-label">Digital Twins</span>
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-dlit81800/" target="_blank" rel="noopener" class="play-btn" aria-label="Ver sesión">
+        <span class="play-circle">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </span>
+      </a>
+    </div>
+    <div class="card-content">
+      <span class="source-badge badge-nvidia">NVIDIA GTC 2026</span>
+      <p class="card-title">Assembling Industrial Digital Twins with OpenUSD and NVIDIA Omniverse Libraries</p>
+      <p class="card-desc">Construye gemelos digitales industriales con el estándar abierto OpenUSD y Omniverse. Clave para argumentar soluciones de simulación y monitoreo de activos.</p>
+      <div class="tags">
         <span class="tag">Digital Twins</span>
         <span class="tag">OpenUSD</span>
         <span class="tag">Omniverse</span>
-        <span class="tag">Manufactura</span>
       </div>
-      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-dlit81800/" target="_blank" rel="noopener" class="card-cta">
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-dlit81800/" target="_blank" rel="noopener" class="cta">
         Ver sesión
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-          <polyline points="15 3 21 3 21 9"/>
-          <line x1="10" y1="14" x2="21" y2="3"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       </a>
-    </article>
+    </div>
+  </article>
 
-    <!-- SESSION 3 -->
-    <article class="card">
-      <div class="card-header">
-        <span class="card-number">3</span>
-        <div>
-          <div class="nvidia-badge">NVIDIA GTC 2026</div>
-        </div>
+  <!-- ③ SMART FACTORY ──────────────────────────────────── -->
+  <article class="card">
+    <div class="thumb th-3">
+      <div class="thumb-bg"></div>
+      <div class="thumb-icon">
+        <!-- factory / settings icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="1.2"><path d="M2 20h20v2H2z"/><path d="M2 10l6-6 4 4 4-4 6 6v10H2z"/><rect x="9" y="13" width="6" height="7"/></svg>
       </div>
-      <h2>From Smart Factory to Lights-Out Factory: Operationalizing Industrial AI With LTTS and NVIDIA</h2>
-      <p>
-        Descubre el camino desde una fábrica inteligente hasta una fábrica completamente autónoma sin operadores humanos en piso. Un caso de uso potente para argumentar el ROI de implementar AI industrial con clientes de manufactura.
-      </p>
-      <div class="card-tags">
+      <span class="thumb-num">4</span>
+      <span class="thumb-label">Smart Factory</span>
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-ex82377/" target="_blank" rel="noopener" class="play-btn" aria-label="Ver sesión">
+        <span class="play-circle">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </span>
+      </a>
+    </div>
+    <div class="card-content">
+      <span class="source-badge badge-nvidia">NVIDIA GTC 2026</span>
+      <p class="card-title">From Smart Factory to Lights-Out Factory: Operationalizing Industrial AI With LTTS and NVIDIA</p>
+      <p class="card-desc">El camino hacia una fábrica completamente autónoma. Argumento potente para calcular el ROI de AI industrial con clientes de manufactura.</p>
+      <div class="tags">
         <span class="tag">Smart Factory</span>
         <span class="tag">Autonomía</span>
-        <span class="tag">Operaciones</span>
         <span class="tag">ROI</span>
       </div>
-      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-ex82377/" target="_blank" rel="noopener" class="card-cta">
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-ex82377/" target="_blank" rel="noopener" class="cta">
         Ver sesión
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-          <polyline points="15 3 21 3 21 9"/>
-          <line x1="10" y1="14" x2="21" y2="3"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       </a>
-    </article>
+    </div>
+  </article>
 
-    <!-- SESSION 4 -->
-    <article class="card">
-      <div class="card-header">
-        <span class="card-number">4</span>
-        <div>
-          <div class="nvidia-badge">NVIDIA GTC 2026</div>
-        </div>
+  <!-- ④ VISUAL AI AGENTS ───────────────────────────────── -->
+  <article class="card">
+    <div class="thumb th-4">
+      <div class="thumb-bg"></div>
+      <div class="thumb-icon">
+        <!-- camera / eye icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1ECB7B" stroke-width="1.2"><circle cx="12" cy="12" r="3"/><path d="M1 12S5 4 12 4s11 8 11 8-4 8-11 8S1 12 1 12z"/></svg>
       </div>
-      <h2>Visual AI Agents for Real-Time Video Understanding</h2>
-      <p>
-        Explora cómo los agentes de AI visual procesan video en tiempo real para detección de defectos, seguridad, control de calidad y supervisión de operaciones en entornos industriales.
-      </p>
-      <div class="card-tags">
+      <span class="thumb-num">5</span>
+      <span class="thumb-label">Computer Vision</span>
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-s81836/" target="_blank" rel="noopener" class="play-btn" aria-label="Ver sesión">
+        <span class="play-circle">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </span>
+      </a>
+    </div>
+    <div class="card-content">
+      <span class="source-badge badge-nvidia">NVIDIA GTC 2026</span>
+      <p class="card-title">Visual AI Agents for Real-Time Video Understanding</p>
+      <p class="card-desc">Agentes de AI visual que procesan video en tiempo real: detección de defectos, seguridad y control de calidad en entornos industriales.</p>
+      <div class="tags">
         <span class="tag">Computer Vision</span>
         <span class="tag">AI Agents</span>
-        <span class="tag">Video Analytics</span>
         <span class="tag">Tiempo Real</span>
       </div>
-      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-s81836/" target="_blank" rel="noopener" class="card-cta">
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-s81836/" target="_blank" rel="noopener" class="cta">
         Ver sesión
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-          <polyline points="15 3 21 3 21 9"/>
-          <line x1="10" y1="14" x2="21" y2="3"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       </a>
-    </article>
+    </div>
+  </article>
 
-    <!-- SESSION 5 -->
-    <article class="card">
-      <div class="card-header">
-        <span class="card-number">5</span>
-        <div>
-          <div class="nvidia-badge">NVIDIA GTC 2026</div>
-        </div>
+  <!-- ⑤ JETSON THOR LLMs ───────────────────────────────── -->
+  <article class="card">
+    <div class="thumb th-5">
+      <div class="thumb-bg"></div>
+      <div class="thumb-icon">
+        <!-- CPU / chip icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="1.2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
       </div>
-      <h2>Deploy and Optimize LLMs and VLMs on NVIDIA Jetson Thor</h2>
-      <p>
-        Aprende a desplegar y optimizar Large Language Models y Vision Language Models directamente en el hardware NVIDIA Jetson Thor — la arquitectura de edge computing de próxima generación que potencia soluciones como las de Mexin Labs.
-      </p>
-      <div class="card-tags">
+      <span class="thumb-num">6</span>
+      <span class="thumb-label">Jetson Thor · LLM/VLM</span>
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-dlit81738/" target="_blank" rel="noopener" class="play-btn" aria-label="Ver sesión">
+        <span class="play-circle">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </span>
+      </a>
+    </div>
+    <div class="card-content">
+      <span class="source-badge badge-nvidia">NVIDIA GTC 2026</span>
+      <p class="card-title">Deploy and Optimize LLMs and VLMs on NVIDIA Jetson Thor</p>
+      <p class="card-desc">Despliega y optimiza LLMs y VLMs directamente en Jetson Thor — el hardware de edge AI de próxima generación que potencia soluciones como las de Mexin Labs.</p>
+      <div class="tags">
         <span class="tag">LLM</span>
         <span class="tag">VLM</span>
         <span class="tag">Jetson Thor</span>
         <span class="tag">Edge AI</span>
-        <span class="tag">Despliegue</span>
       </div>
-      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-dlit81738/" target="_blank" rel="noopener" class="card-cta">
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-dlit81738/" target="_blank" rel="noopener" class="cta">
         Ver sesión
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-          <polyline points="15 3 21 3 21 9"/>
-          <line x1="10" y1="14" x2="21" y2="3"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       </a>
-    </article>
+    </div>
+  </article>
 
-    <!-- SESSION 6 -->
-    <article class="card">
-      <div class="card-header">
-        <span class="card-number">6</span>
-        <div>
-          <div class="nvidia-badge">NVIDIA GTC 2026</div>
-        </div>
+  <!-- ⑥ OMNIVERSE KIT STREAMING ────────────────────────── -->
+  <article class="card">
+    <div class="thumb th-6">
+      <div class="thumb-bg"></div>
+      <div class="thumb-icon">
+        <!-- cloud / streaming icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1ECB7B" stroke-width="1.2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
       </div>
-      <h2>Building and Deploying Digital Twin Applications With Omniverse Kit App Streaming</h2>
-      <p>
-        Descubre cómo construir y distribuir aplicaciones de gemelos digitales usando Omniverse Kit App Streaming, permitiendo que múltiples usuarios accedan a simulaciones industriales en tiempo real desde cualquier dispositivo.
-      </p>
-      <div class="card-tags">
+      <span class="thumb-num">7</span>
+      <span class="thumb-label">Omniverse · Streaming</span>
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-dlit81798/" target="_blank" rel="noopener" class="play-btn" aria-label="Ver sesión">
+        <span class="play-circle">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </span>
+      </a>
+    </div>
+    <div class="card-content">
+      <span class="source-badge badge-nvidia">NVIDIA GTC 2026</span>
+      <p class="card-title">Building and Deploying Digital Twin Applications With Omniverse Kit App Streaming</p>
+      <p class="card-desc">Distribuye simulaciones industriales en tiempo real a cualquier dispositivo usando Omniverse Kit App Streaming — sin instalar nada en el cliente.</p>
+      <div class="tags">
         <span class="tag">Digital Twins</span>
-        <span class="tag">Omniverse Kit</span>
         <span class="tag">App Streaming</span>
         <span class="tag">3D Industrial</span>
       </div>
-      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-dlit81798/" target="_blank" rel="noopener" class="card-cta">
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-dlit81798/" target="_blank" rel="noopener" class="cta">
         Ver sesión
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-          <polyline points="15 3 21 3 21 9"/>
-          <line x1="10" y1="14" x2="21" y2="3"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       </a>
-    </article>
+    </div>
+  </article>
 
-    <!-- SESSION 7 -->
-    <article class="card">
-      <div class="card-header">
-        <span class="card-number">7</span>
-        <div>
-          <div class="nvidia-badge">NVIDIA GTC 2026</div>
-        </div>
+  <!-- ⑦ EDGE SENSOR PROCESSING ─────────────────────────── -->
+  <article class="card">
+    <div class="thumb th-7">
+      <div class="thumb-bg"></div>
+      <div class="thumb-icon">
+        <!-- wifi / signal icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="1.2"><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M10.54 16.1a6 6 0 0 1 2.92 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
       </div>
-      <h2>The Edge of the Edge: Redefining GPU-Enabled AI Sensor Processing</h2>
-      <p>
-        Redefiniendo el procesamiento de sensores con GPUs en el extremo de la red: desde cámaras y LIDAR hasta sensores IoT industriales, aprende cómo el AI en el borde más lejano de la infraestructura transforma la toma de decisiones en tiempo real.
-      </p>
-      <div class="card-tags">
+      <span class="thumb-num">8</span>
+      <span class="thumb-label">Edge · Sensores · GPU</span>
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-s81525/" target="_blank" rel="noopener" class="play-btn" aria-label="Ver sesión">
+        <span class="play-circle">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </span>
+      </a>
+    </div>
+    <div class="card-content">
+      <span class="source-badge badge-nvidia">NVIDIA GTC 2026</span>
+      <p class="card-title">The Edge of the Edge: Redefining GPU-Enabled AI Sensor Processing</p>
+      <p class="card-desc">Procesamiento de sensores con GPUs en el extremo de la red: desde cámaras y LIDAR hasta IoT industrial, toma de decisiones en tiempo real.</p>
+      <div class="tags">
         <span class="tag">Edge Computing</span>
         <span class="tag">Sensores</span>
-        <span class="tag">GPU</span>
         <span class="tag">IoT Industrial</span>
       </div>
-      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-s81525/" target="_blank" rel="noopener" class="card-cta">
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-s81525/" target="_blank" rel="noopener" class="cta">
         Ver sesión
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-          <polyline points="15 3 21 3 21 9"/>
-          <line x1="10" y1="14" x2="21" y2="3"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       </a>
-    </article>
+    </div>
+  </article>
 
-    <!-- SESSION 8 -->
-    <article class="card">
-      <div class="card-header">
-        <span class="card-number">8</span>
-        <div>
-          <div class="nvidia-badge">NVIDIA GTC 2026</div>
-        </div>
+  <!-- ⑧ RETAIL PHYSICAL AI ─────────────────────────────── -->
+  <article class="card">
+    <div class="thumb th-8">
+      <div class="thumb-bg"></div>
+      <div class="thumb-icon">
+        <!-- shopping / store icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="1.2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       </div>
-      <h2>Reinvent Omnichannel Retail With Physical AI: Connect Stores From Edge to Cloud</h2>
-      <p>
-        Cómo el Physical AI está reinventando el retail omnicanal conectando tiendas físicas desde el edge hasta la nube: análisis de tráfico, gestión de inventario autónoma y experiencias personalizadas en tiempo real.
-      </p>
-      <div class="card-tags">
+      <span class="thumb-num">9</span>
+      <span class="thumb-label">Retail · Physical AI</span>
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-s82335/" target="_blank" rel="noopener" class="play-btn" aria-label="Ver sesión">
+        <span class="play-circle">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </span>
+      </a>
+    </div>
+    <div class="card-content">
+      <span class="source-badge badge-nvidia">NVIDIA GTC 2026</span>
+      <p class="card-title">Reinvent Omnichannel Retail With Physical AI: Connect Stores From Edge to Cloud</p>
+      <p class="card-desc">Physical AI reinventando el retail omnicanal: análisis de tráfico, inventario autónomo y experiencias personalizadas conectando tiendas desde edge hasta la nube.</p>
+      <div class="tags">
         <span class="tag">Retail</span>
         <span class="tag">Physical AI</span>
-        <span class="tag">Omnicanal</span>
         <span class="tag">Edge to Cloud</span>
       </div>
-      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-s82335/" target="_blank" rel="noopener" class="card-cta">
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-s82335/" target="_blank" rel="noopener" class="cta">
         Ver sesión
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-          <polyline points="15 3 21 3 21 9"/>
-          <line x1="10" y1="14" x2="21" y2="3"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       </a>
-    </article>
-
-    <!-- SESSION 9 — Double -->
-    <article class="card card-dual">
-      <div class="card-header">
-        <span class="card-number">9</span>
-        <div>
-          <div class="nvidia-badge">NVIDIA GTC 2026 · 2 sesiones</div>
-        </div>
-      </div>
-      <div class="dual-sessions">
-        <div class="dual-session-item">
-          <h3>Transforming Industry With Physical AI</h3>
-          <p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px;">
-            Presentado por Agile Robots. Descubre cómo el Physical AI está transformando la manufactura con robots autónomos capaces de operar en entornos industriales no estructurados.
-          </p>
-          <div class="card-tags" style="margin-bottom:12px;">
-            <span class="tag">Physical AI</span>
-            <span class="tag">Robótica</span>
-            <span class="tag">Agile Robots</span>
-          </div>
-          <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-ex82450/" target="_blank" rel="noopener" class="card-cta">
-            Ver sesión
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-              <polyline points="15 3 21 3 21 9"/>
-              <line x1="10" y1="14" x2="21" y2="3"/>
-            </svg>
-          </a>
-        </div>
-        <div class="dual-session-item">
-          <h3>Edge Computing 101: Introduction to Smart Edge and Autonomous Robots</h3>
-          <p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px;">
-            Introducción fundamental al edge computing inteligente y los robots autónomos. Perfecta como sesión de cierre para consolidar todos los conceptos del programa de onboarding.
-          </p>
-          <div class="card-tags" style="margin-bottom:12px;">
-            <span class="tag">Edge Computing 101</span>
-            <span class="tag">Robots Autónomos</span>
-            <span class="tag">Fundamentos</span>
-          </div>
-          <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-s81842/" target="_blank" rel="noopener" class="card-cta">
-            Ver sesión
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-              <polyline points="15 3 21 3 21 9"/>
-              <line x1="10" y1="14" x2="21" y2="3"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </article>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <img src="https://mexinlabs.ai/assets/LogoBlanco-Cc_0xiUD.png" alt="Mexin Labs" />
-      <p>
-        Material de onboarding preparado por el equipo de <a href="https://mexinlabs.ai" target="_blank" rel="noopener">Mexin Labs</a> ·
-        Contenido seleccionado de <a href="https://www.nvidia.com/en-us/on-demand/" target="_blank" rel="noopener">NVIDIA GTC 2026</a>
-      </p>
     </div>
-  </footer>
+  </article>
+
+  <!-- ⑩ PHYSICAL AI — AGILE ROBOTS ───────────────────────── -->
+  <article class="card">
+    <div class="thumb th-9">
+      <div class="thumb-bg"></div>
+      <div class="thumb-icon">
+        <!-- robot icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><line x1="12" y1="2" x2="12" y2="4"/></svg>
+      </div>
+      <span class="thumb-num">10</span>
+      <span class="thumb-label">Physical AI · Robótica</span>
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-ex82450/" target="_blank" rel="noopener" class="play-btn" aria-label="Ver sesión">
+        <span class="play-circle">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </span>
+      </a>
+    </div>
+    <div class="card-content">
+      <span class="source-badge badge-nvidia">NVIDIA GTC 2026</span>
+      <p class="card-title">Transforming Industry With Physical AI</p>
+      <p class="card-desc">Presentado por Agile Robots. Descubre cómo el Physical AI transforma la manufactura con robots autónomos capaces de operar en entornos industriales no estructurados.</p>
+      <div class="tags">
+        <span class="tag">Physical AI</span>
+        <span class="tag">Robótica</span>
+        <span class="tag">Agile Robots</span>
+        <span class="tag">Manufactura</span>
+      </div>
+      <a href="https://www.nvidia.com/en-us/on-demand/session/gtc26-ex82450/" target="_blank" rel="noopener" class="cta">
+        Ver sesión
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+  </article>
+
+</main>
+
+<!-- ── FOOTER ───────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <img src="https://mexinlabs.ai/assets/LogoBlanco-Cc_0xiUD.png" alt="Mexin Labs" />
+    <p>
+      Material de onboarding preparado por <a href="https://mexinlabs.ai" target="_blank" rel="noopener">Mexin Labs</a> ·
+      Contenido seleccionado de <a href="https://www.nvidia.com/en-us/on-demand/" target="_blank" rel="noopener">NVIDIA GTC 2026</a>
+    </p>
+  </div>
+</footer>
 
 </body>
 </html>
